@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-OmniPresence_AR/Pods-OmniPresence_AR-frameworks.sh
+${BUILT_PRODUCTS_DIR}/AZSClient/AZSClient.framework
+${BUILT_PRODUCTS_DIR}/CocoaImageHashing/CocoaImageHashing.framework
+${BUILT_PRODUCTS_DIR}/SwiftGifOrigin/SwiftGifOrigin.framework

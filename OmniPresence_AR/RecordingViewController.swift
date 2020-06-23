@@ -8,23 +8,27 @@
 
 import UIKit
 
-class RecordingViewController: UIViewController {
+class RecordingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
+    @IBOutlet weak var recordingTableView:UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        recordingTableView.tableFooterView = UIView()
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        5
     }
-    */
 
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "recordingCell", for: indexPath) as? RecordingLibraryCell else {return UITableViewCell()}
+        cell.recordingTitle.text = "Recording"
+        return cell
+    }
+}
+
+class RecordingLibraryCell: UITableViewCell {
+    @IBOutlet weak var recordingTitle: UILabel!
 }

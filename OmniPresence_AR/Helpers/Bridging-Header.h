@@ -11,3 +11,6 @@
 
 
 #endif /* Bridging_Header_h */
+
+#import <AZSClient/AZSClient.h>
+#import <CommonCrypto/CommonHMAC.h>

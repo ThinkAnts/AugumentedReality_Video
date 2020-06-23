@@ -1,0 +1,32 @@
+PODS:
+  - AZSClient (0.2.6)
+  - CocoaImageHashing (1.8.0)
+  - SwiftGifOrigin (1.7.0)
+
+DEPENDENCIES:
+  - AZSClient
+  - CocoaImageHashing (from `https://github.com/ameingast/cocoaimagehashing.git`)
+  - SwiftGifOrigin
+
+SPEC REPOS:
+  trunk:
+    - AZSClient
+    - SwiftGifOrigin
+
+EXTERNAL SOURCES:
+  CocoaImageHashing:
+    :git: https://github.com/ameingast/cocoaimagehashing.git
+
+CHECKOUT OPTIONS:
+  CocoaImageHashing:
+    :commit: 5830cb0dcd4e4ce08f348991d78a4445fb44a93f
+    :git: https://github.com/ameingast/cocoaimagehashing.git
+
+SPEC CHECKSUMS:
+  AZSClient: efd576cabf56f97e38cb1b614739f4b0c1906392
+  CocoaImageHashing: a6a167d657a11b9284dfb37c92377abfd57a254b
+  SwiftGifOrigin: fbd6cf37afcfcf97a5c3db996ddc0492e5c5c145
+
+PODFILE CHECKSUM: b9d2d849aa4b15268cbdc22390ba4278c0efa189
+
+COCOAPODS: 1.9.1

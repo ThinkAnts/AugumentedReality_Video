@@ -3,27 +3,50 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		712F709124963674001422A0 /* AzureServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712F709024963674001422A0 /* AzureServiceViewController.swift */; };
+		71579EAB2483FB5600AF029E /* RecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71579EAA2483FB5600AF029E /* RecordingViewController.swift */; };
+		7176378F24856F2F002FCFCF /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7176378E24856F2F002FCFCF /* ActivityIndicatorView.swift */; };
+		71AE4114248BD4E700B6ED7E /* Test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 71AE4113248BD4E700B6ED7E /* Test.mp4 */; };
+		71D1D21124779B650075256B /* 22494-scan-animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 71D1D21024779B650075256B /* 22494-scan-animation.gif */; };
 		71E5CBAB247787A000CB75D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E5CBAA247787A000CB75D2 /* AppDelegate.swift */; };
 		71E5CBAD247787A000CB75D2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E5CBAC247787A000CB75D2 /* ViewController.swift */; };
-		71E5CBAF247787A000CB75D2 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = 71E5CBAE247787A000CB75D2 /* Experience.rcproject */; };
 		71E5CBB2247787A000CB75D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E5CBB0247787A000CB75D2 /* Main.storyboard */; };
 		71E5CBB4247787A200CB75D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71E5CBB3247787A200CB75D2 /* Assets.xcassets */; };
 		71E5CBB7247787A200CB75D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71E5CBB5247787A200CB75D2 /* LaunchScreen.storyboard */; };
+		71FEB248247800250095D11C /* BoundingBoxImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FEB247247800250095D11C /* BoundingBoxImageView.swift */; };
+		71FEB24A247800540095D11C /* UIImageView-ImageRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FEB249247800540095D11C /* UIImageView-ImageRect.swift */; };
+		71FEB24C24781FFF0095D11C /* VideoRecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FEB24B24781FFF0095D11C /* VideoRecordingViewController.swift */; };
+		71FEB24E247822760095D11C /* VideoPlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FEB24D247822760095D11C /* VideoPlaybackViewController.swift */; };
+		71FEB2502478E44E0095D11C /* SetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FEB24F2478E44E0095D11C /* SetingsViewController.swift */; };
+		CA0201DC9035B59F47B09125 /* Pods_OmniPresence_AR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340040EAE6EC861E75959023 /* Pods_OmniPresence_AR.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		71E5CBA7247787A000CB75D2 /* OmniPresence_AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmniPresence_AR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		340040EAE6EC861E75959023 /* Pods_OmniPresence_AR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OmniPresence_AR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		712F709024963674001422A0 /* AzureServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureServiceViewController.swift; sourceTree = "<group>"; };
+		71579EAA2483FB5600AF029E /* RecordingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingViewController.swift; sourceTree = "<group>"; };
+		71579EAC24840B4400AF029E /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		7176378E24856F2F002FCFCF /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		71AE4113248BD4E700B6ED7E /* Test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Test.mp4; sourceTree = "<group>"; };
+		71D1D21024779B650075256B /* 22494-scan-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "22494-scan-animation.gif"; sourceTree = "<group>"; };
+		71E5CBA7247787A000CB75D2 /* Video AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video AR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71E5CBAA247787A000CB75D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71E5CBAC247787A000CB75D2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		71E5CBAE247787A000CB75D2 /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
 		71E5CBB1247787A000CB75D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		71E5CBB3247787A200CB75D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71E5CBB6247787A200CB75D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		71E5CBB8247787A200CB75D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71FEB247247800250095D11C /* BoundingBoxImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxImageView.swift; sourceTree = "<group>"; };
+		71FEB249247800540095D11C /* UIImageView-ImageRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView-ImageRect.swift"; sourceTree = "<group>"; };
+		71FEB24B24781FFF0095D11C /* VideoRecordingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecordingViewController.swift; sourceTree = "<group>"; };
+		71FEB24D247822760095D11C /* VideoPlaybackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlaybackViewController.swift; sourceTree = "<group>"; };
+		71FEB24F2478E44E0095D11C /* SetingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetingsViewController.swift; sourceTree = "<group>"; };
+		9149F529ECC7BB2B438430DD /* Pods-OmniPresence_AR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OmniPresence_AR.release.xcconfig"; path = "Target Support Files/Pods-OmniPresence_AR/Pods-OmniPresence_AR.release.xcconfig"; sourceTree = "<group>"; };
+		D8E1F5C7BA8516AEFAC1B1EC /* Pods-OmniPresence_AR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OmniPresence_AR.debug.xcconfig"; path = "Target Support Files/Pods-OmniPresence_AR/Pods-OmniPresence_AR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,24 +54,61 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA0201DC9035B59F47B09125 /* Pods_OmniPresence_AR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CCD7F014B02D822C183751A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				340040EAE6EC861E75959023 /* Pods_OmniPresence_AR.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5AC37E659B9EC66045E6015D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D8E1F5C7BA8516AEFAC1B1EC /* Pods-OmniPresence_AR.debug.xcconfig */,
+				9149F529ECC7BB2B438430DD /* Pods-OmniPresence_AR.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		712F708F2496363E001422A0 /* Azure Service */ = {
+			isa = PBXGroup;
+			children = (
+				712F709024963674001422A0 /* AzureServiceViewController.swift */,
+			);
+			path = "Azure Service";
+			sourceTree = "<group>";
+		};
+		71D1D20F24779B4C0075256B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				71AE4113248BD4E700B6ED7E /* Test.mp4 */,
+				71D1D21024779B650075256B /* 22494-scan-animation.gif */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		71E5CB9E247787A000CB75D2 = {
 			isa = PBXGroup;
 			children = (
 				71E5CBA9247787A000CB75D2 /* OmniPresence_AR */,
 				71E5CBA8247787A000CB75D2 /* Products */,
+				5AC37E659B9EC66045E6015D /* Pods */,
+				4CCD7F014B02D822C183751A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		71E5CBA8247787A000CB75D2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				71E5CBA7247787A000CB75D2 /* OmniPresence_AR.app */,
+				71E5CBA7247787A000CB75D2 /* Video AR.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,15 +116,32 @@
 		71E5CBA9247787A000CB75D2 /* OmniPresence_AR */ = {
 			isa = PBXGroup;
 			children = (
+				712F708F2496363E001422A0 /* Azure Service */,
+				71FEB2462477FFF70095D11C /* Helpers */,
 				71E5CBAA247787A000CB75D2 /* AppDelegate.swift */,
 				71E5CBAC247787A000CB75D2 /* ViewController.swift */,
-				71E5CBAE247787A000CB75D2 /* Experience.rcproject */,
+				71FEB24B24781FFF0095D11C /* VideoRecordingViewController.swift */,
+				71FEB24D247822760095D11C /* VideoPlaybackViewController.swift */,
+				71FEB24F2478E44E0095D11C /* SetingsViewController.swift */,
+				71579EAA2483FB5600AF029E /* RecordingViewController.swift */,
 				71E5CBB0247787A000CB75D2 /* Main.storyboard */,
 				71E5CBB3247787A200CB75D2 /* Assets.xcassets */,
 				71E5CBB5247787A200CB75D2 /* LaunchScreen.storyboard */,
+				71D1D20F24779B4C0075256B /* Resources */,
 				71E5CBB8247787A200CB75D2 /* Info.plist */,
 			);
 			path = OmniPresence_AR;
+			sourceTree = "<group>";
+		};
+		71FEB2462477FFF70095D11C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				71FEB247247800250095D11C /* BoundingBoxImageView.swift */,
+				71FEB249247800540095D11C /* UIImageView-ImageRect.swift */,
+				71579EAC24840B4400AF029E /* Bridging-Header.h */,
+				7176378E24856F2F002FCFCF /* ActivityIndicatorView.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +151,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 71E5CBBB247787A200CB75D2 /* Build configuration list for PBXNativeTarget "OmniPresence_AR" */;
 			buildPhases = (
+				B98825E9B05C538A918C82EB /* [CP] Check Pods Manifest.lock */,
 				71E5CBA3247787A000CB75D2 /* Sources */,
 				71E5CBA4247787A000CB75D2 /* Frameworks */,
 				71E5CBA5247787A000CB75D2 /* Resources */,
+				040CBBB71A7CCAC0089AD380 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -84,7 +163,7 @@
 			);
 			name = OmniPresence_AR;
 			productName = OmniPresence_AR;
-			productReference = 71E5CBA7247787A000CB75D2 /* OmniPresence_AR.app */;
+			productReference = 71E5CBA7247787A000CB75D2 /* Video AR.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -125,22 +204,73 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71D1D21124779B650075256B /* 22494-scan-animation.gif in Resources */,
 				71E5CBB7247787A200CB75D2 /* LaunchScreen.storyboard in Resources */,
 				71E5CBB4247787A200CB75D2 /* Assets.xcassets in Resources */,
 				71E5CBB2247787A000CB75D2 /* Main.storyboard in Resources */,
+				71AE4114248BD4E700B6ED7E /* Test.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		040CBBB71A7CCAC0089AD380 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OmniPresence_AR/Pods-OmniPresence_AR-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OmniPresence_AR/Pods-OmniPresence_AR-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OmniPresence_AR/Pods-OmniPresence_AR-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B98825E9B05C538A918C82EB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OmniPresence_AR-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		71E5CBA3247787A000CB75D2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71FEB24C24781FFF0095D11C /* VideoRecordingViewController.swift in Sources */,
 				71E5CBAD247787A000CB75D2 /* ViewController.swift in Sources */,
+				71FEB2502478E44E0095D11C /* SetingsViewController.swift in Sources */,
+				71FEB24E247822760095D11C /* VideoPlaybackViewController.swift in Sources */,
+				71579EAB2483FB5600AF029E /* RecordingViewController.swift in Sources */,
+				71FEB24A247800540095D11C /* UIImageView-ImageRect.swift in Sources */,
+				7176378F24856F2F002FCFCF /* ActivityIndicatorView.swift in Sources */,
 				71E5CBAB247787A000CB75D2 /* AppDelegate.swift in Sources */,
-				71E5CBAF247787A000CB75D2 /* Experience.rcproject in Sources */,
+				712F709124963674001422A0 /* AzureServiceViewController.swift in Sources */,
+				71FEB248247800250095D11C /* BoundingBoxImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +346,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +400,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -282,6 +412,7 @@
 		};
 		71E5CBBC247787A200CB75D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8E1F5C7BA8516AEFAC1B1EC /* Pods-OmniPresence_AR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -292,7 +423,8 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "IG.OmniPresence-AR";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Video AR";
+				SWIFT_OBJC_BRIDGING_HEADER = "OmniPresence_AR/Helpers/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -300,6 +432,7 @@
 		};
 		71E5CBBD247787A200CB75D2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9149F529ECC7BB2B438430DD /* Pods-OmniPresence_AR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -310,7 +443,8 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "IG.OmniPresence-AR";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Video AR";
+				SWIFT_OBJC_BRIDGING_HEADER = "OmniPresence_AR/Helpers/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

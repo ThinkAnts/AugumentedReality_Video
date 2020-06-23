@@ -1,0 +1,6 @@
+framework module Pods_OmniPresence_AR {
+  umbrella header "Pods-OmniPresence_AR-umbrella.h"
+
+  export *
+  module * { export * }
+}

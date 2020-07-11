@@ -17,70 +17,19 @@ import ARKit
 
 class VideoPlaybackViewController: UIViewController, ARSCNViewDelegate {
 
-    @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var videoView: UIView!
-    @IBOutlet var imageView: BoundingBoxImageView!
     let avPlayer = AVPlayer()
     var avPlayerLayer: AVPlayerLayer!
     var videoURL: URL!
     var progressHUD: ProgressHUD?
     var imageUrl: URL!
-
-    
-    // MARK: Authentication
-    
-//    // If using a SAS token, fill it in here.  If using Shared Key access, comment out the following line.
-//    var containerURL = "https://arresources.blob.core.windows.net/arvideocontainer?sv=2019-10-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2020-06-19T17:36:36Z&st=2020-06-14T09:36:36Z&spr=https&sig=3YECYmscCInBlnZdpJoHsoy4cnKluq%2FKnGtCwb4ZG0o%3D"
-//    var usingSAS = true
-//
-//    // If using Shared Key access, fill in your credentials here and un-comment the "UsingSAS" line:
-//    var connectionString = "DefaultEndpointsProtocol=https;AccountName=arresources;AccountKey=zr+kJ5squREEy9PpiqZVHUTZurXaoZfRcNo49sLMjtdqZDTtMNQVSmg/ThuL+uLYTVrleMSZ8s4+5st1nXZ1vg==;EndpointSuffix=core.windows.net"
-//    var containerName = "arvideocontainer"
-//    var blobs = [AZSCloudBlob]()
-//    var container : AZSCloudBlobContainer
-//    var continuationToken : AZSContinuationToken?
-    
-    var textRecognitionRequest = VNRecognizeTextRequest(completionHandler: nil)
-    private let textRecognitionWorkQueue = DispatchQueue(label: "TextRecognitionQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
-        
-    // MARK: Initializers
-    
-//    required init?(coder aDecoder: NSCoder) {
-//        if (usingSAS) {
-//            var error: NSError?
-//            self.container = AZSCloudBlobContainer(url: URL(string: containerURL)!, error: &error)
-//            if ((error) != nil) {
-//                print("Error in creating blob container object.  Error code = %ld, error domain = %@, error userinfo = %@", error!.code, error!.domain, error!.userInfo);
-//            }
-//        }
-//        else {
-//            //            do {
-//            let storageAccount : AZSCloudStorageAccount;
-//            try! storageAccount = AZSCloudStorageAccount(fromConnectionString: connectionString)
-//            let blobClient = storageAccount.getBlobClient()
-//            self.container = blobClient.containerReference(fromName: containerName)
-//
-//            let condition = NSCondition()
-//            var containerCreated = false
-//
-//            self.container.createContainerIfNotExists { (error : Error?, created) -> Void in
-//                condition.lock()
-//                containerCreated = true
-//                condition.signal()
-//                condition.unlock()
-//            }
-//
-//            condition.lock()
-//            while (!containerCreated) {
-//                condition.wait()
-//            }
-//            condition.unlock()
-//        }
-//
-//        self.continuationToken = nil
-//        super.init(coder: aDecoder)
-//    }
-    
+    var originalImageURL: URL? {
+         didSet {
+             if let url = originalImageURL {
+                 _ = UIImage(contentsOfFile: url.path)
+             }
+         }
+     }
     override func viewDidLoad() {
         super.viewDidLoad()
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
@@ -100,13 +49,6 @@ class VideoPlaybackViewController: UIViewController, ARSCNViewDelegate {
         self.view.addSubview(progressHUD ?? UIView())
         self.view.backgroundColor = UIColor.black
         progressHUD?.hide()
-        
-        imageView.layer.cornerRadius = 10.0
-        //scanButton.layer.cornerRadius = 10.0
-        
-        sceneView.delegate = self
-
-        setupVision()
     }
         
     @IBAction func cancel() {
@@ -114,16 +56,9 @@ class VideoPlaybackViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func save() {
- // create the alert
-        let alert = UIAlertController(title: "Thumbnail Image", message: "Please set a thumbnail image ", preferredStyle: UIAlertController.Style.alert)
-
-        alert.addAction(UIAlertAction(title: "Continue", style: UIAlertAction.Style.default, handler: {[weak self] (_: UIAlertAction!) in
-            self?.scanDocument()
-           }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-
-        // show the alert
-        self.present(alert, animated: true, completion: nil)
+        guard let saveViewController = storyboard?.instantiateViewController(withIdentifier: "saveRecord") as? SaveRecordsViewController else { return }
+        saveViewController.videoURL = self.videoURL
+        self.navigationController?.pushViewController(saveViewController, animated: true)
     }
     
     func uploadToAzure(name: String, imageUrl: URL) {
@@ -132,116 +67,126 @@ class VideoPlaybackViewController: UIViewController, ARSCNViewDelegate {
             self?.progressHUD?.hide()
         })
     }
-    
-        /// Setup the Vision request as it can be reused
-        private func setupVision() {
-            textRecognitionRequest = VNRecognizeTextRequest { (request, error) in
-                guard let observations = request.results as? [VNRecognizedTextObservation] else { return }
-                
-                var detectedText = ""
-                var boundingBoxes = [CGRect]()
-                for observation in observations {
-                    guard let topCandidate = observation.topCandidates(1).first else { return }
-                    
-                    detectedText += topCandidate.string
-                    detectedText += "\n"
-                    
-                    do {
-                        guard let rectangle = try topCandidate.boundingBox(for: topCandidate.string.startIndex..<topCandidate.string.endIndex) else { return }
-                        boundingBoxes.append(rectangle.boundingBox)
-                    } catch {
-                        // You should handle errors appropriately in your app
-                        print(error)
-                    }
-                }
-                
-                DispatchQueue.main.async {
-                    self.progressHUD?.show()
-                    print(detectedText.prefix(5))
-                    self.uploadToAzure(name: String(detectedText.prefix(5)), imageUrl: self.imageUrl)
-                    self.imageView.load(boundingBoxes: boundingBoxes)
-                }
-            }
-            textRecognitionRequest.recognitionLevel = .accurate
-        }
-        
-        /// Shows a `VNDocumentCameraViewController` to let the user scan documents
+
         @objc func scanDocument() {
-            let scannerViewController = VNDocumentCameraViewController()
-            scannerViewController.delegate = self
-            present(scannerViewController, animated: true)
+            let documentCameraViewController = VNDocumentCameraViewController()
+            documentCameraViewController.delegate = self
+            present(documentCameraViewController, animated: true)
         }
-    // MARK: - Scan Handling
-     
-     /// Processes the image by displaying it and extracting text which is shown to the user
-     /// - Parameter image: A `UIImage` to process
-     private func processImage(_ image: UIImage) {
-         imageView.image = image
-         imageView.removeExistingBoundingBoxes()
-         storeToImagePath(image)
-         recognizeTextInImage(image)
-     }
-    
-    private func storeToImagePath(_ image: UIImage) {
-        let filename = getDocumentsDirectory().appendingPathComponent("copy.png")
-        if let data = image.jpegData(compressionQuality: 0.8) {
-               try? data.write(to: filename)
-        }
- 
-        imageUrl = filename
-    }
-     
+
     private func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }
-     /// Recognizes and displays the text from the image
-     /// - Parameter image: `UIImage` to process and perform OCR on
-     private func recognizeTextInImage(_ image: UIImage) {
-         guard let cgImage = image.cgImage else { return }
-         
-         //textView.text = ""
-         textRecognitionWorkQueue.async {
-             let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
-             do {
-                 try requestHandler.perform([self.textRecognitionRequest])
-                 
-             } catch {
-                 print(error)
-             }
-         }
-     }
-    
-    func reloadedImage(_ originalImage: UIImage) -> UIImage {
-           guard let imageData = originalImage.jpegData(compressionQuality: 1),
-               let reloadedImage = UIImage(data: imageData) else {
-                   return originalImage
-           }
-           return reloadedImage
-       }
 }
 
 extension VideoPlaybackViewController: VNDocumentCameraViewControllerDelegate {
-
-    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
-        guard scan.pageCount >= 1 else {
-            controller.dismiss(animated: true)
-            return
-        }
-        let originalImage = scan.imageOfPage(at: 0)
-        let fixedImage = reloadedImage(originalImage)
-        
-        controller.dismiss(animated: true)
-        
-        processImage(fixedImage)
-    }
-    
-    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
-        print(error)
-        controller.dismiss(animated: true)
-    }
-    
-    func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
-        controller.dismiss(animated: true)
-    }
+//    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+//        originalImageURL = saveImage(scan.imageOfPage(at: 0))
+//        let observations = featureprintObservationForImage(atURL: originalImageURL!)
+//        let searchObservations = observations.filter { $0.hasMinimumPrecision(0.2, forRecall: 0.8)}
+//        if searchObservations.count > 0 && searchObservations.first!.confidence > 0.2 {
+//            createImageModel(observations: searchObservations,pathName: searchObservations.first!.identifier + String(format: "%.1f", searchObservations.first!.confidence))
+//        }
+//        controller.dismiss(animated: true)
+//        progressHUD?.show()
+//    }
+//    
+//    func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
+//        controller.dismiss(animated: true) { [weak self] in
+//            self?.navigationController?.popToRootViewController(animated: true)
+//        }
+//    }
 }
+
+//extension VideoPlaybackViewController {
+//    private func saveImage(_ image: UIImage) -> URL? {
+//        guard let imageData = image.pngData() else {
+//            return nil
+//        }
+//        let baseURL = FileManager.default.temporaryDirectory
+//        let imageURL = baseURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
+//        do {
+//            try imageData.write(to: imageURL)
+//            return imageURL
+//        } catch {
+//            print("Error saving image to \(imageURL.path): \(error)")
+//            return nil
+//        }
+//    }
+//
+//    func featureprintObservationForImage(atURL url: URL) -> [VNClassificationObservation] {
+//          let requestHandler = VNImageRequestHandler(url: url, options: [:])
+//          let request = VNClassifyImageRequest()
+//          do {
+//              try requestHandler.perform([request])
+//            guard let observations = request.results as? [VNClassificationObservation] else { return [VNClassificationObservation]() }
+//            return observations
+//          } catch {
+//              print("Vision error: \(error)")
+//              return [VNClassificationObservation]()
+//          }
+//      }
+//
+//    private func createImageModel(observations : [VNClassificationObservation], pathName: String) {
+//        var arrayOfObservations = [String]()
+//        var arrayOfIdentifiers: String = ""
+//        var confidence: Float = 0.0
+//        for observation in observations {
+//            let imageData = ImageObservations(confidence: observation.confidence, identifier: observation.identifier)
+//            var jsonData = Data()
+//            do {
+//                jsonData = try imageData.jsonData()
+//            } catch {
+//                print("Error in converting to json data: \(error)")
+//            }
+//            guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+//                return
+//            }
+//            arrayOfIdentifiers += observation.identifier
+//            arrayOfObservations.append(jsonString)
+//            confidence += observation.confidence
+//        }
+//        confidence = confidence * 100
+//        uploadTOFireBaseVideo(url: videoURL, success: { (downloadUrl) in
+//            if downloadUrl.count > 0 {
+//                let arImageData = ARImageDataBase()
+//
+//                arImageData.addOrUpdateDatabase(imageObs: arrayOfObservations, identifiers: arrayOfIdentifiers, confidence: confidence, videoUrl: downloadUrl, success: { [weak self] (success) in
+//                    self?.progressHUD?.hide()
+//                    _ = self?.navigationController?.popViewController(animated: true)
+//                }) { [weak self] (error) in
+//                    self?.progressHUD?.hide()
+//                    print(error.localizedDescription)
+//                    _ = self?.navigationController?.popViewController(animated: true)
+//                }
+//            }
+//        }) { [weak self](error) in
+//            self?.progressHUD?.hide()
+//            print(error.localizedDescription)
+//        }
+//        progressHUD?.hide()
+//    }
+//
+//    func uploadTOFireBaseVideo(url: URL,
+//                                      success : @escaping (String) -> Void,
+//                                      failure : @escaping (Error) -> Void) {
+//
+//        let name = "\(Int(Date().timeIntervalSince1970)).mp4"
+//        let path = NSTemporaryDirectory() + name
+//
+//        let data = NSData(contentsOf: url as URL)
+//        do {
+//            try data?.write(to: URL(fileURLWithPath: path), options: .atomic)
+//        } catch {
+//            print(error)
+//        }
+//
+//        let arImageData = ARImageDataBase()
+//        arImageData.uploadVideoToStorage(name: name, data: data ?? NSData(), success: { (videoDownloadUrl) in
+//           success(videoDownloadUrl)
+//        }) { (error) in
+//            failure(error)
+//        }
+//    }
+//}

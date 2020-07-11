@@ -8,8 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		712F709124963674001422A0 /* AzureServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712F709024963674001422A0 /* AzureServiceViewController.swift */; };
+		714FF8E024A3244A00BE7603 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 714FF8DF24A3244A00BE7603 /* GoogleService-Info.plist */; };
+		714FF8E424A32CE500BE7603 /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FF8E324A32CE500BE7603 /* ImageData.swift */; };
+		714FF8E624A3349800BE7603 /* FirebaseDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FF8E524A3349800BE7603 /* FirebaseDatabase.swift */; };
+		714FF8E924A35F9000BE7603 /* VisionImageClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714FF8E824A35F9000BE7603 /* VisionImageClassification.swift */; };
 		71579EAB2483FB5600AF029E /* RecordingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71579EAA2483FB5600AF029E /* RecordingViewController.swift */; };
+		715FD3B524AE513D00EE5DC1 /* scanner.gif in Resources */ = {isa = PBXBuildFile; fileRef = 715FD3B424AE513D00EE5DC1 /* scanner.gif */; };
+		715FD3B724AFA26B00EE5DC1 /* SaveRecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FD3B624AFA26B00EE5DC1 /* SaveRecordsViewController.swift */; };
+		717268D324B9C13300DB25D5 /* 45.gif in Resources */ = {isa = PBXBuildFile; fileRef = 717268D224B9C13300DB25D5 /* 45.gif */; };
 		7176378F24856F2F002FCFCF /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7176378E24856F2F002FCFCF /* ActivityIndicatorView.swift */; };
+		717E6D6D24A86E9200B19EA0 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717E6D6C24A86E9200B19EA0 /* RecordViewController.swift */; };
+		717E6D6F24A86ECC00B19EA0 /* VideoHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717E6D6E24A86ECC00B19EA0 /* VideoHelper.swift */; };
 		71AE4114248BD4E700B6ED7E /* Test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 71AE4113248BD4E700B6ED7E /* Test.mp4 */; };
 		71D1D21124779B650075256B /* 22494-scan-animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 71D1D21024779B650075256B /* 22494-scan-animation.gif */; };
 		71E5CBAB247787A000CB75D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E5CBAA247787A000CB75D2 /* AppDelegate.swift */; };
@@ -28,9 +37,18 @@
 /* Begin PBXFileReference section */
 		340040EAE6EC861E75959023 /* Pods_OmniPresence_AR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OmniPresence_AR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		712F709024963674001422A0 /* AzureServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureServiceViewController.swift; sourceTree = "<group>"; };
+		714FF8DF24A3244A00BE7603 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		714FF8E324A32CE500BE7603 /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
+		714FF8E524A3349800BE7603 /* FirebaseDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabase.swift; sourceTree = "<group>"; };
+		714FF8E824A35F9000BE7603 /* VisionImageClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionImageClassification.swift; sourceTree = "<group>"; };
 		71579EAA2483FB5600AF029E /* RecordingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingViewController.swift; sourceTree = "<group>"; };
 		71579EAC24840B4400AF029E /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		715FD3B424AE513D00EE5DC1 /* scanner.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = scanner.gif; sourceTree = "<group>"; };
+		715FD3B624AFA26B00EE5DC1 /* SaveRecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRecordsViewController.swift; sourceTree = "<group>"; };
+		717268D224B9C13300DB25D5 /* 45.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 45.gif; sourceTree = "<group>"; };
 		7176378E24856F2F002FCFCF /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		717E6D6C24A86E9200B19EA0 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		717E6D6E24A86ECC00B19EA0 /* VideoHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHelper.swift; sourceTree = "<group>"; };
 		71AE4113248BD4E700B6ED7E /* Test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Test.mp4; sourceTree = "<group>"; };
 		71D1D21024779B650075256B /* 22494-scan-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "22494-scan-animation.gif"; sourceTree = "<group>"; };
 		71E5CBA7247787A000CB75D2 /* Video AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Video AR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,9 +104,35 @@
 			path = "Azure Service";
 			sourceTree = "<group>";
 		};
+		714FF8E124A32CB300BE7603 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				714FF8E524A3349800BE7603 /* FirebaseDatabase.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		714FF8E224A32CC900BE7603 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				714FF8E324A32CE500BE7603 /* ImageData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		714FF8E724A35F6D00BE7603 /* Vision Api */ = {
+			isa = PBXGroup;
+			children = (
+				714FF8E824A35F9000BE7603 /* VisionImageClassification.swift */,
+			);
+			path = "Vision Api";
+			sourceTree = "<group>";
+		};
 		71D1D20F24779B4C0075256B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				717268D224B9C13300DB25D5 /* 45.gif */,
+				715FD3B424AE513D00EE5DC1 /* scanner.gif */,
 				71AE4113248BD4E700B6ED7E /* Test.mp4 */,
 				71D1D21024779B650075256B /* 22494-scan-animation.gif */,
 			);
@@ -116,6 +160,9 @@
 		71E5CBA9247787A000CB75D2 /* OmniPresence_AR */ = {
 			isa = PBXGroup;
 			children = (
+				714FF8E724A35F6D00BE7603 /* Vision Api */,
+				714FF8E224A32CC900BE7603 /* Model */,
+				714FF8E124A32CB300BE7603 /* Firebase */,
 				712F708F2496363E001422A0 /* Azure Service */,
 				71FEB2462477FFF70095D11C /* Helpers */,
 				71E5CBAA247787A000CB75D2 /* AppDelegate.swift */,
@@ -124,11 +171,14 @@
 				71FEB24D247822760095D11C /* VideoPlaybackViewController.swift */,
 				71FEB24F2478E44E0095D11C /* SetingsViewController.swift */,
 				71579EAA2483FB5600AF029E /* RecordingViewController.swift */,
+				715FD3B624AFA26B00EE5DC1 /* SaveRecordsViewController.swift */,
 				71E5CBB0247787A000CB75D2 /* Main.storyboard */,
 				71E5CBB3247787A200CB75D2 /* Assets.xcassets */,
 				71E5CBB5247787A200CB75D2 /* LaunchScreen.storyboard */,
 				71D1D20F24779B4C0075256B /* Resources */,
 				71E5CBB8247787A200CB75D2 /* Info.plist */,
+				714FF8DF24A3244A00BE7603 /* GoogleService-Info.plist */,
+				717E6D6C24A86E9200B19EA0 /* RecordViewController.swift */,
 			);
 			path = OmniPresence_AR;
 			sourceTree = "<group>";
@@ -140,6 +190,7 @@
 				71FEB249247800540095D11C /* UIImageView-ImageRect.swift */,
 				71579EAC24840B4400AF029E /* Bridging-Header.h */,
 				7176378E24856F2F002FCFCF /* ActivityIndicatorView.swift */,
+				717E6D6E24A86ECC00B19EA0 /* VideoHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -205,10 +256,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				71D1D21124779B650075256B /* 22494-scan-animation.gif in Resources */,
+				714FF8E024A3244A00BE7603 /* GoogleService-Info.plist in Resources */,
 				71E5CBB7247787A200CB75D2 /* LaunchScreen.storyboard in Resources */,
+				717268D324B9C13300DB25D5 /* 45.gif in Resources */,
 				71E5CBB4247787A200CB75D2 /* Assets.xcassets in Resources */,
 				71E5CBB2247787A000CB75D2 /* Main.storyboard in Resources */,
 				71AE4114248BD4E700B6ED7E /* Test.mp4 in Resources */,
+				715FD3B524AE513D00EE5DC1 /* scanner.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,13 +318,19 @@
 				71FEB24C24781FFF0095D11C /* VideoRecordingViewController.swift in Sources */,
 				71E5CBAD247787A000CB75D2 /* ViewController.swift in Sources */,
 				71FEB2502478E44E0095D11C /* SetingsViewController.swift in Sources */,
+				717E6D6F24A86ECC00B19EA0 /* VideoHelper.swift in Sources */,
+				717E6D6D24A86E9200B19EA0 /* RecordViewController.swift in Sources */,
 				71FEB24E247822760095D11C /* VideoPlaybackViewController.swift in Sources */,
 				71579EAB2483FB5600AF029E /* RecordingViewController.swift in Sources */,
 				71FEB24A247800540095D11C /* UIImageView-ImageRect.swift in Sources */,
+				714FF8E424A32CE500BE7603 /* ImageData.swift in Sources */,
 				7176378F24856F2F002FCFCF /* ActivityIndicatorView.swift in Sources */,
+				715FD3B724AFA26B00EE5DC1 /* SaveRecordsViewController.swift in Sources */,
 				71E5CBAB247787A000CB75D2 /* AppDelegate.swift in Sources */,
 				712F709124963674001422A0 /* AzureServiceViewController.swift in Sources */,
 				71FEB248247800250095D11C /* BoundingBoxImageView.swift in Sources */,
+				714FF8E624A3349800BE7603 /* FirebaseDatabase.swift in Sources */,
+				714FF8E924A35F9000BE7603 /* VisionImageClassification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +482,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "IG.OmniPresence-AR";
+				PRODUCT_BUNDLE_IDENTIFIER = "IG.OmniPresence-AR1";
 				PRODUCT_NAME = "Video AR";
 				SWIFT_OBJC_BRIDGING_HEADER = "OmniPresence_AR/Helpers/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -442,7 +502,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "IG.OmniPresence-AR";
+				PRODUCT_BUNDLE_IDENTIFIER = "IG.OmniPresence-AR1";
 				PRODUCT_NAME = "Video AR";
 				SWIFT_OBJC_BRIDGING_HEADER = "OmniPresence_AR/Helpers/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

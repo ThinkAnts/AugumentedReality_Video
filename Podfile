@@ -9,5 +9,9 @@ target 'OmniPresence_AR' do
   pod 'SwiftGifOrigin'
   pod 'AZSClient'
   pod 'CocoaImageHashing', :git => 'https://github.com/ameingast/cocoaimagehashing.git'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Database'
 
 end

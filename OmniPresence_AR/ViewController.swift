@@ -21,46 +21,78 @@ class ViewController: UIViewController {
     @IBOutlet weak var scanButton: UIButton!
     @IBOutlet weak var scanningImage: UIImageView!
     @IBOutlet var imageView: BoundingBoxImageView!
+    var requiredImage: UIImage?
     var firstData: Data?
     var fileUrlString: URL?
     var newReferenceImages:Set<ARReferenceImage> = Set<ARReferenceImage>()
     var textRecognitionRequest = VNRecognizeTextRequest(completionHandler: nil)
     private let textRecognitionWorkQueue = DispatchQueue(label: "TextRecognitionQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
+    var originalImageURL: URL? {
+        didSet {
+            if let url = originalImageURL {
+                requiredImage = UIImage(contentsOfFile: url.path)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        scanningImage.image = UIImage.gif(name: "22494-scan-animation")
+        scanningImage.image = UIImage.gif(name: "scanner")
         sceneView.delegate = self
         showScanner(isVisible: false)
         //scanButton.isHidden = false
         sceneView.isHidden = false
-        setupVision()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //loadARView()
+        if sceneView.isHidden == false {
+            sceneView.isHidden = true
+        }
+        
+        if scanButton.isHidden == true {
+            scanButton.isHidden = false
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         resetTracking()
+        if sceneView.isHidden == false {
+            sceneView.isHidden = true
+        }
     }
     
     func loadARView() {
-        let configuration = ARImageTrackingConfiguration()
-        guard let trackedImages = ARReferenceImage.referenceImages(inGroupNamed: "AR", bundle: nil) else {
-            fatalError("Couldn't load tracking images.")
+        if sceneView.isHidden == true {
+            sceneView.isHidden = false
         }
-        configuration.trackingImages = newReferenceImages
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.detectionImages = newReferenceImages
+        configuration.maximumNumberOfTrackedImages = 1;
+        configuration.planeDetection = [.horizontal, .vertical]
         sceneView.session.run(configuration)
     }
     
     
-    public func resetTracking() {
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.detectionImages = newReferenceImages;
-        configuration.maximumNumberOfTrackedImages = 1;
-        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+//    public func resetTracking() {
+//        let configuration = ARWorldTrackingConfiguration()
+//        configuration.detectionImages = newReferenceImages;
+//        configuration.maximumNumberOfTrackedImages = 1;
+//        sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
+//    }
+    
+    func sessionInterruptionEnded(_ session: ARSession) {
+        resetTracking()
+    }
+    private func resetTracking() {
+        let config = ARWorldTrackingConfiguration()
+        config.planeDetection = [.vertical, .horizontal]
+        sceneView.scene.rootNode.enumerateChildNodes { (childNode, _) in
+            childNode.removeFromParentNode()
+        }
+        sceneView.session.run(config, options: [.removeExistingAnchors,
+                                             .resetTracking, ])
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -71,15 +103,14 @@ class ViewController: UIViewController {
     func showScanner(isVisible: Bool) {
         if isVisible {
             scanningImage.isHidden = false
-            scanButton.isHidden = true
         } else {
             scanningImage.isHidden = true
-            scanButton.isHidden = false
         }
     }
     
     @IBAction func scanImage() {
-        scanDocument()
+        //scanDocument()
+        showCameraView()
     }
 }
 
@@ -87,24 +118,24 @@ extension ViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         guard let imageAnchor = anchor as? ARImageAnchor else { return nil }
-//        guard let fileUrlString = Bundle.main.path(forResource: "Test", ofType: "mp4") else {
-//            debugPrint("video not found")
-//            return nil
-//        }
+        //let filePath = Bundle.main.url(forResource: "Test", withExtension: "mp4")
         let plane = SCNPlane(width: imageAnchor.referenceImage.physicalSize.width, height: imageAnchor.referenceImage.physicalSize.height)
-        let videoItem = AVPlayerItem(url: fileUrlString!)
+//        guard let urlSt = URL(string: "https:/firebasestorage.googleapis.com/v0/b/omni-ar.appspot.com/o/Videos%252F1593328648.mp4%3Falt=media&token=cbdc0113-5ede-4d6d-9bd0-c3ea97f8a8be -- file:///") else { return nil }
+        let videoItem = AVPlayerItem(url:fileUrlString!)
         let player = AVPlayer(playerItem: videoItem)
         let videoNode = SKVideoNode(avPlayer: player)
         player.play()
-        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: nil) { (notification) in
-            player.seek(to: CMTime.zero)
-            player.play()
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: nil) { [weak self] (notification) in
+            self?.scanButton.isHidden = false
+            self?.sceneView.isHidden = true
+            
         }
         
         
-        let videoScene = SKScene(size: CGSize(width: 480, height: 360))
+        let videoScene = SKScene(size: CGSize(width: imageAnchor.referenceImage.physicalSize.width, height: imageAnchor.referenceImage.physicalSize.height))
+        videoScene.backgroundColor = UIColor.clear
         videoNode.position = CGPoint(x: videoScene.size.width / 2, y: videoScene.size.height / 2)
-        videoNode.yScale = -1.0
+        videoNode.yScale = 1.0
         videoScene.addChild(videoNode)
         plane.firstMaterial?.diffuse.contents = videoScene
         
@@ -112,6 +143,7 @@ extension ViewController: ARSCNViewDelegate {
         planeNode.eulerAngles.x = -.pi / 2
         DispatchQueue.main.async {
             self.showScanner(isVisible: false)
+            self.scanButton.isHidden = true
         }
         
         let node = SCNNode()
@@ -241,27 +273,114 @@ extension ViewController {
     }
 }
 
-extension ViewController: VNDocumentCameraViewControllerDelegate {
-
-    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
-        guard scan.pageCount >= 1 else {
-            controller.dismiss(animated: true)
-            return
-        }
-        let originalImage = scan.imageOfPage(at: 0)
-        let fixedImage = reloadedImage(originalImage)
-        
-        controller.dismiss(animated: true)
-        
-        processImage(fixedImage)
+extension ViewController {
+   
+    func showCameraView() {
+        let documentCameraViewController = VNDocumentCameraViewController()
+        documentCameraViewController.delegate = self
+        present(documentCameraViewController, animated: true)
     }
     
-    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
-        print(error)
+    private func saveImage(_ image: UIImage) -> URL? {
+        guard let imageData = image.pngData() else {
+            return nil
+        }
+        let baseURL = FileManager.default.temporaryDirectory
+        let imageURL = baseURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
+        do {
+            try imageData.write(to: imageURL)
+            return imageURL
+        } catch {
+            print("Error saving image to \(imageURL.path): \(error)")
+            return nil
+        }
+    }
+    
+    func featureprintObservationForImage(atURL url: URL) -> [VNClassificationObservation] {
+          let requestHandler = VNImageRequestHandler(url: url, options: [:])
+          let request = VNClassifyImageRequest()
+          do {
+              try requestHandler.perform([request])
+            guard let observations = request.results as? [VNClassificationObservation] else { return [VNClassificationObservation]() }
+            return observations
+          } catch {
+              print("Vision error: \(error)")
+              return [VNClassificationObservation]()
+          }
+      }
+    
+    private func fetchImageData(confidence: Float, identifiers: String) {
+        showScanner(isVisible: true)
+        let arImageData = ARImageDataBase()
+        arImageData.retrieveFromDatabase(confidence: confidence, identifiers: identifiers, success: { [weak self] (videoUrl) in
+            let arImage = ARReferenceImage((self?.requiredImage?.cgImage!)!, orientation: CGImagePropertyOrientation.up, physicalWidth: 480.0)
+                    self?.newReferenceImages.insert(arImage)
+                 DispatchQueue.main.async {
+                    if videoUrl.count != 0 {
+                        self?.fileUrlString = URL(string: videoUrl)
+                        self?.loadARView();
+                        self?.scanButton.isHidden = true
+                    } else {
+                        self?.sceneView.isHidden = true
+                        self?.showScanner(isVisible: false)
+                        self?.scanButton.isHidden = false
+                    }
+            }
+        }) { [weak self](error) in
+            self?.sceneView.isHidden = true
+            self?.showScanner(isVisible: false)
+            self?.scanButton.isHidden = false
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func showErrorAlert() {
+        let alert = UIAlertController(title: "Image is not proper", message: "Please choose good quality image", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func createImageModel(observations : [VNClassificationObservation]) {
+        var arrayOfObservations = [String]()
+        var identifiersString: String = ""
+        var confidence: Float = 0.0
+        for observation in observations {
+            let imageData = ImageObservations(confidence: observation.confidence, identifier: observation.identifier)
+            var jsonData = Data()
+            do {
+                jsonData = try imageData.jsonData()
+            } catch {
+                print("Error in converting to json data: \(error)")
+            }
+            guard let jsonString = String(data: jsonData, encoding: .utf8) else {
+                return
+            }
+            identifiersString += observation.identifier
+            arrayOfObservations.append(jsonString)
+            confidence += observation.confidence
+        }
+        confidence = confidence * 100
+        fetchImageData(confidence: confidence, identifiers: identifiersString)
+    }
+}
+
+extension ViewController: VNDocumentCameraViewControllerDelegate {
+    func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
+        originalImageURL = saveImage(scan.imageOfPage(at: 0))
+        let observations = featureprintObservationForImage(atURL: originalImageURL!)
+        let searchObservations = observations.filter { $0.hasMinimumPrecision(0.2, forRecall: 0.8)}
+        if searchObservations.count > 0 && searchObservations.first!.confidence > 0.3 {
+            createImageModel(observations: searchObservations)
+        } else {
+            showErrorAlert()
+        }
         controller.dismiss(animated: true)
     }
     
     func documentCameraViewControllerDidCancel(_ controller: VNDocumentCameraViewController) {
-        controller.dismiss(animated: true)
+        controller.dismiss(animated: true) { [weak self] in
+            self?.sceneView.isHidden = true
+            self?.navigationController?.popToRootViewController(animated: true)
+        }
     }
 }

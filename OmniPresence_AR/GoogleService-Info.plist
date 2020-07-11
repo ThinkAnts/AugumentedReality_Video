@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1041425562962-osv7helhs14u5pi181pid5jb03d0rc29.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1041425562962-osv7helhs14u5pi181pid5jb03d0rc29</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDroaulgzUKccFbA-tfvlV7HlSqCKwLyUw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1041425562962</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>IG.OmniPresence-AR</string>
+	<key>PROJECT_ID</key>
+	<string>omni-ar</string>
+	<key>STORAGE_BUCKET</key>
+	<string>omni-ar.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1041425562962:ios:860cea826d89c79d7a8e8b</string>
+	<key>DATABASE_URL</key>
+	<string>https://omni-ar.firebaseio.com</string>
+</dict>
+</plist>

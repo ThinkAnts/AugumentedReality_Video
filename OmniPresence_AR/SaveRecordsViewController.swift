@@ -10,6 +10,8 @@ import UIKit
 import AVFoundation
 import Vision
 import VisionKit
+import AVKit
+
 
 class SaveRecordsViewController: UIViewController {
 
@@ -39,40 +41,21 @@ class SaveRecordsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleField.text = setTitle
-        errorField.isHidden = true
         self.navigationController?.navigationBar.isTranslucent = true
+        nameField.setBottomBorder()
+        descriptionField.setBottomBorder()
+        arImageField.setBottomBorder()
         if videoData.count > 0 {
             videoURL = URL(string: videoData["VideoUrl"] as? String ?? "")
             nameField.text = videoData["Name"] as? String ?? ""
             descriptionField.text = videoData["Description"] as? String ?? ""
             arImageField.text = videoData["ARImageName"] as? String ?? ""
         }
-//        avPlayerLayer = AVPlayerLayer(player: avPlayer)
-//        avPlayerLayer.frame = videoView.layer.bounds
-//        avPlayerLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-//        videoView.layer.addSublayer(avPlayerLayer)
-//        let playerItem = AVPlayerItem(url: videoURL as URL)
-//        avPlayer.replaceCurrentItem(with: playerItem)
-        displayARVideo()
-    }
-    
-    func displayARVideo() {
-        let player = AVPlayer(url: videoURL)
-        let layer: AVPlayerLayer = AVPlayerLayer(player: player)
-        layer.backgroundColor = UIColor.white.cgColor
-        layer.frame = videoView.bounds
-        layer.videoGravity = .resizeAspect
-//        videoView.layer.sublayers?
-//            .filter { $0 is AVPlayerLayer }
-//            .forEach { $0.removeFromSuperlayer() }
-        //videoView.layer.addSublayer(layer)
-        videoView.layer.insertSublayer(layer, at: 0)
-        videoView.layoutIfNeeded()
+        playVideo(videoUrl: videoURL, to: videoView)
     }
 
     @IBAction func cancel() {
-        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func save() {
@@ -99,6 +82,20 @@ class SaveRecordsViewController: UIViewController {
         documentCameraViewController.delegate = self
         present(documentCameraViewController, animated: true)
       }
+    
+    
+    /* Embedded player with controls */
+    func playVideo(videoUrl: URL, to view: UIView) {
+        let player = AVPlayer(url: videoUrl)
+        let playerController = AVPlayerViewController()
+        playerController.player = player
+        self.addChild(playerController)
+        // Add your view Frame
+        playerController.view.frame = view.bounds
+        // Add sub view in your view
+        view.addSubview(playerController.view)
+        player.play()
+    }
 }
 
 extension SaveRecordsViewController {

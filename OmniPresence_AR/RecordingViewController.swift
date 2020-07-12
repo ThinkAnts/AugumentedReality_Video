@@ -60,6 +60,7 @@ class RecordingViewController: UIViewController, UITableViewDataSource, UITableV
         guard let saveViewController = storyboard?.instantiateViewController(withIdentifier: "saveRecord") as? SaveRecordsViewController else { return }
         saveViewController.videoData = data
         saveViewController.setTitle = "Edit AR Video"
+        saveViewController.isUpdating = true
         self.navigationController?.pushViewController(saveViewController, animated: true)
     }
 }

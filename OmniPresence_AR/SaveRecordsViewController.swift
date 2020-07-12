@@ -11,6 +11,7 @@ import AVFoundation
 import Vision
 import VisionKit
 import AVKit
+import MobileCoreServices
 
 
 class SaveRecordsViewController: UIViewController {
@@ -19,8 +20,11 @@ class SaveRecordsViewController: UIViewController {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var arImageField: UITextField!
-    @IBOutlet weak var titleField: UILabel!
-    @IBOutlet weak var errorField: UILabel!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    var imagePickerController = UIImagePickerController()
+    var enableEditButton = false
+    var isUpdating = false
     var videoData = NSDictionary()
     var videoURL: URL!
     let avPlayer = AVPlayer()
@@ -37,7 +41,7 @@ class SaveRecordsViewController: UIViewController {
     var identifiers: String = ""
     var confidence: Float = 0.0
     var firebaseVideoUrl: String = ""
-
+    var firebaseKey: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +54,15 @@ class SaveRecordsViewController: UIViewController {
             nameField.text = videoData["Name"] as? String ?? ""
             descriptionField.text = videoData["Description"] as? String ?? ""
             arImageField.text = videoData["ARImageName"] as? String ?? ""
+            firebaseKey = videoData["Key"] as? String ?? ""
+        }
+        if enableEditButton == true {
+            editButton.isHidden = enableEditButton
+        }
+        if isUpdating == true {
+            saveButton.setTitle("UPDATE", for: .normal)
+        } else {
+            saveButton.setTitle("SAVE", for: .normal)
         }
         playVideo(videoUrl: videoURL, to: videoView)
     }
@@ -59,21 +72,10 @@ class SaveRecordsViewController: UIViewController {
     }
     
     @IBAction func save() {
-        if nameField.text?.count != 0 && descriptionField.text?.count != 0 && arImageField.text?.count != 0 {
-            let arImageData = ARImageDataBase()
-            arImageData.addOrUpdateDatabase(imageObs: imageObservations, identifiers: identifiers, confidence: confidence, videoUrl: firebaseVideoUrl, name: nameField.text ?? "temp",description: descriptionField.text ?? "temp", arImageName: arImageField.text ?? "temp", success: { [weak self] (success) in
-                _ = self?.navigationController?.popViewController(animated: true)
-            }) { [weak self] (error) in
-                print(error.localizedDescription)
-                _ = self?.navigationController?.popViewController(animated: true)
-            }
+        if !enableEditButton {
+            updateToFireBase()
         } else {
-            errorField.isHidden = false
-            if nameField.text == nil {
-                errorField.text = "Name is required"
-            } else if arImageField.text == nil {
-                errorField.text = "AR Image Name is required"
-            }
+            saveToFireBase()
         }
    }
     
@@ -95,6 +97,53 @@ class SaveRecordsViewController: UIViewController {
         // Add sub view in your view
         view.addSubview(playerController.view)
         player.play()
+    }
+    
+    @IBAction func editAction() {
+        // 1 Check if project runs on a device with camera available
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            // 2 Present UIImagePickerController to take video
+            imagePickerController.sourceType = .camera
+            imagePickerController.mediaTypes = [kUTTypeMovie as String]
+            imagePickerController.delegate = self
+            
+            present(imagePickerController, animated: true, completion: nil)
+        }
+        else {
+            print("Camera is not available")
+        }
+    }
+    
+    func saveToFireBase() {
+        if nameField.text?.count != 0 && descriptionField.text?.count != 0 && arImageField.text?.count != 0 {
+            let arImageData = ARImageDataBase()
+            arImageData.addOrUpdateDatabase(imageObs: imageObservations, identifiers: identifiers, confidence: confidence, videoUrl: firebaseVideoUrl, name: nameField.text ?? "temp",description: descriptionField.text ?? "temp", arImageName: arImageField.text ?? "temp", success: { [weak self] (success) in
+                _ = self?.navigationController?.popViewController(animated: true)
+            }) { [weak self] (error) in
+                print(error.localizedDescription)
+                _ = self?.navigationController?.popViewController(animated: true)
+            }
+        } else {
+            if nameField.text == nil {
+            } else if arImageField.text == nil {
+            }
+        }
+    }
+    
+    func updateToFireBase() {
+        if nameField.text?.count != 0 && descriptionField.text?.count != 0 && arImageField.text?.count != 0 {
+            let arImageData = ARImageDataBase()
+            arImageData.updateARecord(imageObs: imageObservations, identifiers: identifiers, confidence: confidence, videoUrl: firebaseVideoUrl, name: nameField.text ?? "temp",description: descriptionField.text ?? "temp", arImageName: arImageField.text ?? "temp", key: firebaseKey, success: { [weak self] (success) in
+                _ = self?.navigationController?.popViewController(animated: true)
+            }) { [weak self] (error) in
+                print(error.localizedDescription)
+                _ = self?.navigationController?.popViewController(animated: true)
+            }
+        } else {
+            if nameField.text == nil {
+            } else if arImageField.text == nil {
+            }
+        }
     }
 }
 
@@ -191,5 +240,18 @@ extension SaveRecordsViewController: VNDocumentCameraViewControllerDelegate {
         controller.dismiss(animated: true) { [weak self] in
             self?.navigationController?.popToRootViewController(animated: true)
         }
+    }
+}
+
+extension SaveRecordsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let videoUrl = info[.mediaURL] as? URL else {
+            return imagePickerController.dismiss(animated: true, completion: nil)
+        }
+        self.videoURL = videoUrl
+        self.firebaseVideoUrl = self.videoURL.absoluteString
+        playVideo(videoUrl: self.videoURL, to: videoView)
+        imagePickerController.dismiss(animated: true, completion: nil)
     }
 }

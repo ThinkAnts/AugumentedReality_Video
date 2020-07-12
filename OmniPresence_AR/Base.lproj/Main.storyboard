@@ -247,83 +247,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAa-Hq-jeS">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sLc-pM-fhR">
-                                <rect key="frame" x="0.0" y="621" width="414" height="192"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egD-eI-Rh8">
+                                <rect key="frame" x="0.0" y="384" width="414" height="128"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zVC-rB-xVK">
-                                        <rect key="frame" x="177" y="66" width="60" height="60"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="Md4-At-fBG"/>
-                                            <constraint firstAttribute="height" constant="60" id="vrU-P8-seQ"/>
-                                        </constraints>
-                                        <state key="normal" image="Record"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxg-xF-WpL">
+                                        <rect key="frame" x="13" y="46" width="185" height="36"/>
+                                        <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                                        <state key="normal" title="Take a Video">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
-                                            <action selector="startCapture" destination="cWD-ik-VnN" eventType="touchUpInside" id="Tnc-IC-l85"/>
+                                            <action selector="takeAVideo" destination="cWD-ik-VnN" eventType="touchUpInside" id="p5N-lO-8yC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WiC-P5-sOg">
+                                        <rect key="frame" x="231" y="46" width="165" height="36"/>
+                                        <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                                        <state key="normal" title="Upload a Video">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="uploadFromLibrary" destination="cWD-ik-VnN" eventType="touchUpInside" id="Ue2-AZ-a2h"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="192" id="GYE-NO-ZWf"/>
-                                    <constraint firstItem="zVC-rB-xVK" firstAttribute="centerY" secondItem="sLc-pM-fhR" secondAttribute="centerY" id="VGi-oj-6Gz"/>
-                                    <constraint firstItem="zVC-rB-xVK" firstAttribute="centerX" secondItem="sLc-pM-fhR" secondAttribute="centerX" id="htW-ob-kxN"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cdq-97-d5O" userLabel="TopView">
-                                <rect key="frame" x="0.0" y="88" width="414" height="100"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5oe-hy-pu2">
-                                        <rect key="frame" x="161.66666666666666" y="41" width="91" height="18"/>
-                                        <fontDescription key="fontDescription" name="HiraginoSans-W7" family="Hiragino Sans" pointSize="18"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="5oe-hy-pu2" firstAttribute="centerY" secondItem="cdq-97-d5O" secondAttribute="centerY" id="3UP-qm-MM3"/>
-                                    <constraint firstItem="5oe-hy-pu2" firstAttribute="centerX" secondItem="cdq-97-d5O" secondAttribute="centerX" id="POU-fV-shA"/>
-                                    <constraint firstAttribute="height" constant="100" id="dFb-W8-N7w"/>
+                                    <constraint firstItem="dxg-xF-WpL" firstAttribute="centerY" secondItem="egD-eI-Rh8" secondAttribute="centerY" id="1hi-zd-XtL"/>
+                                    <constraint firstItem="WiC-P5-sOg" firstAttribute="centerY" secondItem="egD-eI-Rh8" secondAttribute="centerY" id="Ccf-at-dKU"/>
+                                    <constraint firstItem="WiC-P5-sOg" firstAttribute="top" secondItem="egD-eI-Rh8" secondAttribute="top" constant="46" id="DjE-wS-OZ4"/>
+                                    <constraint firstItem="WiC-P5-sOg" firstAttribute="leading" secondItem="dxg-xF-WpL" secondAttribute="trailing" constant="33" id="FHd-yN-gVf"/>
+                                    <constraint firstItem="dxg-xF-WpL" firstAttribute="leading" secondItem="egD-eI-Rh8" secondAttribute="leading" constant="13" id="Xb1-fB-NSN"/>
+                                    <constraint firstItem="dxg-xF-WpL" firstAttribute="width" secondItem="WiC-P5-sOg" secondAttribute="width" multiplier="1.12121" id="bMY-GK-maR"/>
+                                    <constraint firstAttribute="height" constant="128" id="gQS-dj-0nk"/>
+                                    <constraint firstAttribute="bottom" secondItem="WiC-P5-sOg" secondAttribute="bottom" constant="46" id="mKI-9g-RKM"/>
+                                    <constraint firstAttribute="trailing" secondItem="WiC-P5-sOg" secondAttribute="trailing" constant="18" id="pwi-kA-9rl"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="sLc-pM-fhR" firstAttribute="bottom" secondItem="vIi-51-wYQ" secondAttribute="bottom" id="0FA-sl-dz6"/>
-                            <constraint firstItem="jAa-Hq-jeS" firstAttribute="bottom" secondItem="vIi-51-wYQ" secondAttribute="bottom" id="2Kz-UK-noV"/>
-                            <constraint firstItem="cdq-97-d5O" firstAttribute="top" secondItem="vIi-51-wYQ" secondAttribute="top" id="8RU-S1-Gkt"/>
-                            <constraint firstItem="cdq-97-d5O" firstAttribute="trailing" secondItem="vIi-51-wYQ" secondAttribute="trailing" id="C86-PG-p64"/>
-                            <constraint firstItem="jAa-Hq-jeS" firstAttribute="leading" secondItem="vIi-51-wYQ" secondAttribute="leading" id="Ccd-Op-eq5"/>
-                            <constraint firstItem="sLc-pM-fhR" firstAttribute="trailing" secondItem="vIi-51-wYQ" secondAttribute="trailing" id="H2U-pD-CLh"/>
-                            <constraint firstItem="cdq-97-d5O" firstAttribute="leading" secondItem="vIi-51-wYQ" secondAttribute="leading" id="gwo-xX-nwB"/>
-                            <constraint firstItem="jAa-Hq-jeS" firstAttribute="trailing" secondItem="vIi-51-wYQ" secondAttribute="trailing" id="iIK-vA-QXt"/>
-                            <constraint firstItem="jAa-Hq-jeS" firstAttribute="top" secondItem="vIi-51-wYQ" secondAttribute="top" id="nUl-2N-Vks"/>
-                            <constraint firstItem="sLc-pM-fhR" firstAttribute="leading" secondItem="vIi-51-wYQ" secondAttribute="leading" id="vW0-GG-CVA"/>
+                            <constraint firstItem="egD-eI-Rh8" firstAttribute="trailing" secondItem="vIi-51-wYQ" secondAttribute="trailing" id="TVb-Cv-x1S"/>
+                            <constraint firstItem="egD-eI-Rh8" firstAttribute="centerY" secondItem="FEq-bX-UGX" secondAttribute="centerY" id="UzW-Qk-eMV"/>
+                            <constraint firstItem="egD-eI-Rh8" firstAttribute="leading" secondItem="vIi-51-wYQ" secondAttribute="leading" id="kkj-YN-fHM"/>
+                            <constraint firstItem="egD-eI-Rh8" firstAttribute="centerX" secondItem="FEq-bX-UGX" secondAttribute="centerX" id="mUL-V9-vLj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vIi-51-wYQ"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Uco-xN-O4j">
-                        <barButtonItem key="rightBarButtonItem" title="Library" id="vFS-Yv-rxz">
-                            <connections>
-                                <action selector="uploadFromLibrary" destination="cWD-ik-VnN" id="qZg-Pb-5b9"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="Uco-xN-O4j"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="camPreview" destination="jAa-Hq-jeS" id="DYT-8E-YQi"/>
-                        <outlet property="recordButton" destination="zVC-rB-xVK" id="sQ4-pf-L37"/>
-                        <outlet property="recordTimer" destination="5oe-hy-pu2" id="iVn-Je-t38"/>
-                        <segue destination="uT1-Jo-Fa2" kind="show" identifier="showVideo" id="XRW-LO-2xp"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTo-zk-nxa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="830.16105417276719" y="911.13281249999989"/>
+            <point key="canvasLocation" x="828.98550724637687" y="910.71428571428567"/>
         </scene>
         <!--Video Playback View Controller-->
         <scene sceneID="Zws-BI-Ird">
@@ -334,11 +312,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="roy-OD-7J0">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TlK-Ya-T3U">
-                                <rect key="frame" x="20" y="339" width="374" height="227"/>
+                                <rect key="frame" x="20" y="295" width="374" height="315"/>
                                 <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                         </subviews>
@@ -578,6 +556,9 @@
                                     <constraint firstAttribute="width" constant="20" id="rHy-mc-CPX"/>
                                 </constraints>
                                 <state key="normal" image="edit"/>
+                                <connections>
+                                    <action selector="editAction" destination="Kjk-zq-vxW" eventType="touchUpInside" id="4aM-Sy-4UY"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -595,7 +576,9 @@
                     <connections>
                         <outlet property="arImageField" destination="XXQ-Lf-5ff" id="BEw-cR-BmN"/>
                         <outlet property="descriptionField" destination="1V0-ds-cCE" id="jiQ-2V-BTD"/>
+                        <outlet property="editButton" destination="Ldn-s8-5U2" id="0Q4-hK-P7M"/>
                         <outlet property="nameField" destination="b2b-8U-UPa" id="6Yl-kl-DSh"/>
+                        <outlet property="saveButton" destination="MDQ-TT-TH1" id="EqC-3z-r9y"/>
                         <outlet property="videoView" destination="c8Q-qp-pdn" id="XTD-GG-vKW"/>
                     </connections>
                 </viewController>
@@ -605,7 +588,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Record" width="512" height="512"/>
         <image name="barcode.viewfinder" catalog="system" width="128" height="114"/>
         <image name="camera.fill" catalog="system" width="128" height="96"/>
         <image name="edit" width="32" height="32"/>

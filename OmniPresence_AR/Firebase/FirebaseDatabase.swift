@@ -18,8 +18,9 @@ class ARImageDataBase {
                              success : @escaping (String) -> Void,
                              failure : @escaping (Error) -> Void) {
         let arImageDB = Database.database().reference().child("ARImageObservations")
-        let imageDictionary : NSDictionary = ["Name": name, "Description": description, "ARImageName": arImageName, "ImageClassification" : imageObs, "Identifiers": identifiers, "confidence": confidence, "VideoUrl": videoUrl]
-        arImageDB.childByAutoId().setValue(imageDictionary) {
+        let key = arImageDB.childByAutoId().key ?? ""
+        let imageDictionary : NSDictionary = ["Name": name, "Description": description, "ARImageName": arImageName, "ImageClassification" : imageObs, "Identifiers": identifiers, "confidence": confidence, "VideoUrl": videoUrl, "Key": key]
+        arImageDB.child(key).setValue(imageDictionary) {
              (error, ref) in
              if error != nil {
                 failure(error!)
@@ -102,6 +103,26 @@ class ARImageDataBase {
                 let error = NSError(domain: "", code: 100, userInfo: [ NSLocalizedDescriptionKey: "No Data Found"])
                 failure(error)
             }
+        }
+    }
+    
+    func updateARecord(imageObs: [String], identifiers: String, confidence: Float, videoUrl: String, name: String,
+                       description: String, arImageName: String, key: String,
+                        success : @escaping (String) -> Void,
+                        failure : @escaping (Error) -> Void) {
+        
+        let arImageDB = Database.database().reference().child("ARImageObservations")
+        let imageDictionary : NSDictionary = ["Name": name, "Description": description, "ARImageName": arImageName, "ImageClassification" : imageObs, "Identifiers": identifiers, "confidence": confidence, "VideoUrl": videoUrl, "Key": key]
+        arImageDB.child(key).setValue(imageDictionary) {
+             (error, ref) in
+             if error != nil {
+                failure(error!)
+                 print(error!)
+             }
+             else {
+                  success("Data Updated successfully")
+                 print("Data Updated successfully!")
+             }
         }
         
     }

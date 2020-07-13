@@ -10,6 +10,6 @@ import Foundation
 
 struct ImageObservations: Encodable {
     
-    var confidence: Float32
+   // var confidence: Float32
     var identifier: String
 }

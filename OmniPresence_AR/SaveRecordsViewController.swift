@@ -60,6 +60,9 @@ class SaveRecordsViewController: UIViewController {
             editButton.isHidden = enableEditButton
         }
         if isUpdating == true {
+            identifiers = videoData["Identifiers"] as? String ?? ""
+            imageObservations = videoData["ImageClassification"] as? [String] ?? [String]()
+            confidence = videoData["confidence"] as? Float ?? 0.0
             saveButton.setTitle("UPDATE", for: .normal)
         } else {
             saveButton.setTitle("SAVE", for: .normal)
@@ -178,7 +181,7 @@ extension SaveRecordsViewController {
     
     private func createImageModel(observations : [VNClassificationObservation], pathName: String) {
         for observation in observations {
-            let imageData = ImageObservations(confidence: observation.confidence, identifier: observation.identifier)
+            let imageData = ImageObservations(identifier: observation.identifier)
             var jsonData = Data()
             do {
                 jsonData = try imageData.jsonData()
@@ -229,8 +232,8 @@ extension SaveRecordsViewController: VNDocumentCameraViewControllerDelegate {
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
         originalImageURL = saveImage(scan.imageOfPage(at: 0))
         let observations = featureprintObservationForImage(atURL: originalImageURL!)
-        let searchObservations = observations.filter { $0.hasMinimumPrecision(0.2, forRecall: 0.8)}
-        if searchObservations.count > 0 && searchObservations.first!.confidence > 0.2 {
+        let searchObservations = Array(observations.prefix(20))//observations.filter { $0.hasMinimumPrecision(0.2, forRecall: 0.8)}
+        if searchObservations.count > 0 {
             createImageModel(observations: searchObservations,pathName: searchObservations.first!.identifier + String(format: "%.1f", searchObservations.first!.confidence))
         }
         controller.dismiss(animated: true)

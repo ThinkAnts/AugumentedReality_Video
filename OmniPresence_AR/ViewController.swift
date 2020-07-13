@@ -14,6 +14,10 @@ import CocoaImageHashing
 import Vision
 import VisionKit
 import RealityKit
+import MobileCoreServices
+import AVKit
+
+
 
 class ViewController: UIViewController {
     
@@ -98,6 +102,8 @@ class ViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         sceneView.session.pause()
+        scanButton.isHidden = false
+        sceneView.isHidden = true
     }
     
     func showScanner(isVisible: Bool) {
@@ -120,15 +126,19 @@ extension ViewController: ARSCNViewDelegate {
         guard let imageAnchor = anchor as? ARImageAnchor else { return nil }
         //let filePath = Bundle.main.url(forResource: "Test", withExtension: "mp4")
         let plane = SCNPlane(width: imageAnchor.referenceImage.physicalSize.width, height: imageAnchor.referenceImage.physicalSize.height)
+
 //        guard let urlSt = URL(string: "https:/firebasestorage.googleapis.com/v0/b/omni-ar.appspot.com/o/Videos%252F1593328648.mp4%3Falt=media&token=cbdc0113-5ede-4d6d-9bd0-c3ea97f8a8be -- file:///") else { return nil }
         let videoItem = AVPlayerItem(url:fileUrlString!)
         let player = AVPlayer(playerItem: videoItem)
+        let playerController = AVPlayerViewController()
+        playerController.player = player
+
         let videoNode = SKVideoNode(avPlayer: player)
         player.play()
+
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: nil) { [weak self] (notification) in
             self?.scanButton.isHidden = false
             self?.sceneView.isHidden = true
-            
         }
         
         
@@ -138,6 +148,7 @@ extension ViewController: ARSCNViewDelegate {
         videoNode.yScale = 1.0
         videoScene.addChild(videoNode)
         plane.firstMaterial?.diffuse.contents = videoScene
+        plane.firstMaterial?.diffuse.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, -1, 1), 0, 1, 0)
         
         let planeNode = SCNNode(geometry: plane)
         planeNode.eulerAngles.x = -.pi / 2
@@ -309,17 +320,17 @@ extension ViewController {
           }
       }
     
-    private func fetchImageData(confidence: Float, identifiers: String) {
+    private func fetchImageData(confidence: Float, identifiers: String, imageObs: [String]) {
         showScanner(isVisible: true)
         let arImageData = ARImageDataBase()
-        arImageData.retrieveFromDatabase(confidence: confidence, identifiers: identifiers, success: { [weak self] (videoUrl) in
+        arImageData.retrieveFromDatabase(confidence: confidence, identifiers: identifiers, imageObs: imageObs, success: { [weak self] (videoUrl) in
             let arImage = ARReferenceImage((self?.requiredImage?.cgImage!)!, orientation: CGImagePropertyOrientation.up, physicalWidth: 480.0)
                     self?.newReferenceImages.insert(arImage)
                  DispatchQueue.main.async {
                     if videoUrl.count != 0 {
                         self?.fileUrlString = URL(string: videoUrl)
-                        self?.loadARView();
                         self?.scanButton.isHidden = true
+                        self?.loadARView();
                     } else {
                         self?.sceneView.isHidden = true
                         self?.showScanner(isVisible: false)
@@ -345,7 +356,7 @@ extension ViewController {
         var identifiersString: String = ""
         var confidence: Float = 0.0
         for observation in observations {
-            let imageData = ImageObservations(confidence: observation.confidence, identifier: observation.identifier)
+            let imageData = ImageObservations(identifier: observation.identifier)
             var jsonData = Data()
             do {
                 jsonData = try imageData.jsonData()
@@ -360,7 +371,8 @@ extension ViewController {
             confidence += observation.confidence
         }
         confidence = confidence * 100
-        fetchImageData(confidence: confidence, identifiers: identifiersString)
+        arrayOfObservations = arrayOfObservations.sorted()
+        fetchImageData(confidence: confidence, identifiers: identifiersString, imageObs: arrayOfObservations)
     }
 }
 
@@ -368,8 +380,8 @@ extension ViewController: VNDocumentCameraViewControllerDelegate {
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
         originalImageURL = saveImage(scan.imageOfPage(at: 0))
         let observations = featureprintObservationForImage(atURL: originalImageURL!)
-        let searchObservations = observations.filter { $0.hasMinimumPrecision(0.2, forRecall: 0.8)}
-        if searchObservations.count > 0 && searchObservations.first!.confidence > 0.3 {
+        let searchObservations = Array(observations.prefix(20))//observations.filter { $0.hasMinimumPrecision(0.2, forRecall: 0.8)}
+        if searchObservations.count > 0 {
             createImageModel(observations: searchObservations)
         } else {
             showErrorAlert()

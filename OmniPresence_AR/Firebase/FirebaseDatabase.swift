@@ -33,33 +33,43 @@ class ARImageDataBase {
         }
     }
     
-    func retrieveFromDatabase(confidence: Float, identifiers: String,
+    func retrieveFromDatabase(confidence: Float, identifiers: String, imageObs: [String],
                               success : @escaping (String) -> Void,
                               failure : @escaping (Error) -> Void) {
         let ref = Database.database().reference().child("ARImageObservations")
-        _=ref.queryOrdered(byChild: "Identifiers").queryStarting(atValue: identifiers).queryEnding(atValue: identifiers+"\u{f8ff}").observeSingleEvent(of: .value, with: { (snapshot) in
+        _=ref.queryOrdered(byChild: "ImageClassification").observeSingleEvent(of: .value, with: { (snapshot) in
            
-            var confValue: Float = 0.0
+            //var confValue: Float = 0.0
             var downLoadUrl: String = ""
             for snap in snapshot.children {
                 let postDic = (snap as? DataSnapshot)?.value as? NSDictionary
-                let conf = postDic?["confidence"] as? Float
-                let downloadUrl = postDic?["VideoUrl"] as? String ?? ""
-                if confValue == 0.0 {
-                    confValue = conf ?? 0.0
-                    downLoadUrl = downloadUrl
-                } else if Int(conf ?? 0.0) > Int(confValue) {
-                    downLoadUrl = postDic?["VideoUrl"] as? String ?? ""
-                    success(downLoadUrl)
-                } else {
-                    success(downLoadUrl)
+                //let conf = postDic?["confidence"] as? Float
+                downLoadUrl = postDic?["VideoUrl"] as? String ?? ""
+                if let imageClassifcationArray = postDic?["ImageClassification"] as? [String] {
+                    if imageClassifcationArray.count > 0 {
+                        var sortedArray = [String]()
+                        if (imageClassifcationArray.count >= 20) {
+                            sortedArray = Array(imageClassifcationArray[0..<20])
+                            sortedArray = sortedArray.sorted()
+                            let missingValues = Set(imageObs).subtracting(Set(sortedArray))
+                            if imageObs.contains(array: sortedArray) {
+                                success(downLoadUrl)
+                            } else if missingValues.count < 5 {
+                                success(downLoadUrl)
+                            }
+                        }
+                    }
                 }
+                
             };
 
             if snapshot.childrenCount == 1 {
                 success(downLoadUrl)
             } else if snapshot.childrenCount == 0 {
                 let error = NSError(domain: "", code: 100, userInfo: [ NSLocalizedDescriptionKey: "No Data Found"])
+                failure(error)
+            } else {
+                let error = NSError(domain: "", code: 101, userInfo: [ NSLocalizedDescriptionKey: "Error Identified"])
                 failure(error)
             }
         })

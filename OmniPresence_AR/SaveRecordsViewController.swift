@@ -22,6 +22,7 @@ class SaveRecordsViewController: UIViewController {
     @IBOutlet weak var arImageField: UITextField!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
+    var progressHUD: ProgressHUD?
     var imagePickerController = UIImagePickerController()
     var enableEditButton = false
     var isUpdating = false
@@ -45,7 +46,7 @@ class SaveRecordsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isTranslucent = true
+        //self.navigationController?.navigationBar.isTranslucent = true
         nameField.setBottomBorder()
         descriptionField.setBottomBorder()
         arImageField.setBottomBorder()
@@ -67,7 +68,17 @@ class SaveRecordsViewController: UIViewController {
         } else {
             saveButton.setTitle("SAVE", for: .normal)
         }
-        playVideo(videoUrl: videoURL, to: videoView)
+        if videoURL != nil  {
+            playVideo(videoUrl: videoURL, to: videoView)
+        }
+        progressHUD = ProgressHUD(text: "Saving Photo")
+        self.view.addSubview(progressHUD ?? UIView())
+        self.view.backgroundColor = UIColor.black
+        progressHUD?.hide()
+        
+         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: self.view.window)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: self.view.window)
+
     }
 
     @IBAction func cancel() {
@@ -75,12 +86,27 @@ class SaveRecordsViewController: UIViewController {
     }
     
     @IBAction func save() {
-        if !enableEditButton {
-            updateToFireBase()
-        } else {
-            saveToFireBase()
-        }
+        saveData()
    }
+    
+    func saveData() {
+         if nameField.text?.count != 0 && descriptionField.text?.count != 0 && arImageField.text?.count != 0 {
+             progressHUD?.show()
+            if !enableEditButton {
+                progressHUD = ProgressHUD(text: "Updating Record")
+                updateToFireBase()
+            } else {
+                progressHUD = ProgressHUD(text: "Saving Record")
+                saveToFireBase()
+            }
+         } else {
+            if nameField.text == nil {
+                showErrorAlert(message: "Name cannot be empty", title: "Please enter Name")
+            } else if arImageField.text == nil {
+                showErrorAlert(message: "AR Image Name cannot be empty", title: "Please enter AR Image Name")
+            }
+        }
+    }
     
     @IBAction func takeARImage() {
         let documentCameraViewController = VNDocumentCameraViewController()
@@ -118,19 +144,15 @@ class SaveRecordsViewController: UIViewController {
     }
     
     func saveToFireBase() {
-        if nameField.text?.count != 0 && descriptionField.text?.count != 0 && arImageField.text?.count != 0 {
             let arImageData = ARImageDataBase()
             arImageData.addOrUpdateDatabase(imageObs: imageObservations, identifiers: identifiers, confidence: confidence, videoUrl: firebaseVideoUrl, name: nameField.text ?? "temp",description: descriptionField.text ?? "temp", arImageName: arImageField.text ?? "temp", success: { [weak self] (success) in
+                self?.progressHUD?.hide()
                 _ = self?.navigationController?.popViewController(animated: true)
             }) { [weak self] (error) in
                 print(error.localizedDescription)
+                self?.progressHUD?.hide()
                 _ = self?.navigationController?.popViewController(animated: true)
             }
-        } else {
-            if nameField.text == nil {
-            } else if arImageField.text == nil {
-            }
-        }
     }
     
     func updateToFireBase() {
@@ -140,13 +162,46 @@ class SaveRecordsViewController: UIViewController {
                 _ = self?.navigationController?.popViewController(animated: true)
             }) { [weak self] (error) in
                 print(error.localizedDescription)
+                self?.progressHUD?.hide()
                 _ = self?.navigationController?.popViewController(animated: true)
             }
         } else {
             if nameField.text == nil {
+                showErrorAlert(message: "Name cannot be empty", title: "Please enter Name")
             } else if arImageField.text == nil {
+                showErrorAlert(message: "AR Image Name cannot be empty", title: "Please enter AR Image Name")
             }
         }
+    }
+    
+    private func showErrorAlert(message: String, title: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func keyboardWillShow(sender: NSNotification) {
+        guard let userInfo = sender.userInfo else {return}
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else {return}
+        let keyboardFrame = keyboardSize.cgRectValue
+
+        if self.view.frame.origin.y == 0{
+            self.view.frame.origin.y -= keyboardFrame.height
+        }
+    }
+    
+    @objc func keyboardWillHide(sender: NSNotification) {
+        guard let userInfo = sender.userInfo else {return}
+        if let _ = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y = 0
+             }
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: self.view.window)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: self.view.window)
     }
 }
 
@@ -196,13 +251,17 @@ extension SaveRecordsViewController {
             confidence += observation.confidence
         }
         confidence = confidence * 100
-        uploadTOFireBaseVideo(url: videoURL, success: { [weak self] (downloadUrl) in
-            if downloadUrl.count > 0 {
-                self?.firebaseVideoUrl = downloadUrl
+        if videoURL != nil {
+            uploadTOFireBaseVideo(url: videoURL, success: { [weak self] (downloadUrl) in
+                if downloadUrl.count > 0 {
+                    self?.firebaseVideoUrl = downloadUrl
+                    self?.saveData()
+                }
+            }) {(error) in
+                print(error.localizedDescription)
             }
-        }) {(error) in
-            print(error.localizedDescription)
         }
+
     }
 
     func uploadTOFireBaseVideo(url: URL,
@@ -258,3 +317,4 @@ extension SaveRecordsViewController: UIImagePickerControllerDelegate, UINavigati
         imagePickerController.dismiss(animated: true, completion: nil)
     }
 }
+

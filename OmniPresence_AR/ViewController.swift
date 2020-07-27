@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     var newReferenceImages:Set<ARReferenceImage> = Set<ARReferenceImage>()
     var textRecognitionRequest = VNRecognizeTextRequest(completionHandler: nil)
     private let textRecognitionWorkQueue = DispatchQueue(label: "TextRecognitionQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
-    
+    let node = SCNNode()
     var originalImageURL: URL? {
         didSet {
             if let url = originalImageURL {
@@ -104,6 +104,7 @@ class ViewController: UIViewController {
         sceneView.session.pause()
         scanButton.isHidden = false
         sceneView.isHidden = true
+        node.removeFromParentNode()
     }
     
     func showScanner(isVisible: Bool) {
@@ -130,8 +131,6 @@ extension ViewController: ARSCNViewDelegate {
 //        guard let urlSt = URL(string: "https:/firebasestorage.googleapis.com/v0/b/omni-ar.appspot.com/o/Videos%252F1593328648.mp4%3Falt=media&token=cbdc0113-5ede-4d6d-9bd0-c3ea97f8a8be -- file:///") else { return nil }
         let videoItem = AVPlayerItem(url:fileUrlString!)
         let player = AVPlayer(playerItem: videoItem)
-        let playerController = AVPlayerViewController()
-        playerController.player = player
 
         let videoNode = SKVideoNode(avPlayer: player)
         player.play()
@@ -139,6 +138,7 @@ extension ViewController: ARSCNViewDelegate {
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player.currentItem, queue: nil) { [weak self] (notification) in
             self?.scanButton.isHidden = false
             self?.sceneView.isHidden = true
+            self?.node.removeFromParentNode()
         }
         
         
@@ -157,7 +157,7 @@ extension ViewController: ARSCNViewDelegate {
             self.scanButton.isHidden = true
         }
         
-        let node = SCNNode()
+        
         node.addChildNode(planeNode)
         return node
     }
@@ -335,18 +335,23 @@ extension ViewController {
                         self?.sceneView.isHidden = true
                         self?.showScanner(isVisible: false)
                         self?.scanButton.isHidden = false
+                        self?.showErrorAlert(title: "AR Video Not found", message: "This Image is not associcated to ARVideo. Please create one")
                     }
             }
         }) { [weak self](error) in
             self?.sceneView.isHidden = true
             self?.showScanner(isVisible: false)
             self?.scanButton.isHidden = false
-            print(error.localizedDescription)
+            if error.localizedDescription == "No Data Found" {
+                self?.showErrorAlert(title: "AR Video Not found", message: "This Image is not associcated to ARVideo. Please create one")
+            } else if error.localizedDescription == "Error Identified" {
+                self?.showErrorAlert(title: "No Records", message: "No records found. Please create one.")
+            }
         }
     }
     
-    private func showErrorAlert() {
-        let alert = UIAlertController(title: "Image is not proper", message: "Please choose good quality image", preferredStyle: UIAlertController.Style.alert)
+    private func showErrorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -384,7 +389,7 @@ extension ViewController: VNDocumentCameraViewControllerDelegate {
         if searchObservations.count > 0 {
             createImageModel(observations: searchObservations)
         } else {
-            showErrorAlert()
+            showErrorAlert(title: "Image is not proper", message: "Please choose good quality image")
         }
         controller.dismiss(animated: true)
     }

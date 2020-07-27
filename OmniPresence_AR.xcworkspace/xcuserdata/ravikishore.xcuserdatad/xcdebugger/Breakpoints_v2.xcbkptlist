@@ -87,64 +87,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1B5B1392-2459-4A45-A6E9-AB899BA34B9F"
+            uuid = "8F16CF35-D538-4BF2-B9BF-F4B63013791D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OmniPresence_AR/SaveRecordsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "updateToFireBase()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "1B5B1392-2459-4A45-A6E9-AB899BA34B9F - 5e735588c46d39f8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Video_AR.SaveRecordsViewController.updateToFireBase() -&gt; ()"
-                  moduleName = "Video AR"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ravikishore/Documents/OmniPresence_AR/OmniPresence_AR/SaveRecordsViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "139"
-                  endingLineNumber = "139"
-                  offsetFromSymbolStart = "1812">
-               </Location>
-               <Location
-                  uuid = "1B5B1392-2459-4A45-A6E9-AB899BA34B9F - f076c0010212e32"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; () in Video_AR.SaveRecordsViewController.updateToFireBase() -&gt; ()"
-                  moduleName = "Video AR"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ravikishore/Documents/OmniPresence_AR/OmniPresence_AR/SaveRecordsViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "139"
-                  endingLineNumber = "139"
-                  offsetFromSymbolStart = "104">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CB83D6D7-F636-42E5-85CC-F8CAF42D78C0"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "OmniPresence_AR/RecordingViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

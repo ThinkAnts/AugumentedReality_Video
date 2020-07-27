@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="V5a-3Q-a6b">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <device id="ipad10_2" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,17 +12,17 @@
             <objects>
                 <viewController id="BYZ-38-t0r" userLabel="ARView" customClass="ViewController" customModule="Video_AR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="el8-1I-otT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97z-S0-r1u">
-                                <rect key="frame" x="0.0" y="145" width="414" height="668"/>
+                                <rect key="frame" x="0.0" y="102" width="810" height="928"/>
                             </arscnView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7j-xu-9OB" customClass="BoundingBoxImageView" customModule="Video_AR" customModuleProvider="target">
-                                <rect key="frame" x="376" y="500" width="16" height="24"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w7j-xu-9OB" customClass="BoundingBoxImageView" customModule="Video_AR" customModuleProvider="target">
+                                <rect key="frame" x="376" y="500" width="58" height="80"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scanner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5i-LM-9HQ">
-                                <rect key="frame" x="67.666666666666686" y="77" width="279" height="60"/>
+                                <rect key="frame" x="265.5" y="33" width="279" height="61"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="61" id="Y5f-bk-0QU"/>
                                 </constraints>
@@ -31,17 +31,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UM2-zO-AKN">
-                                <rect key="frame" x="107" y="374" width="200" height="200"/>
+                                <rect key="frame" x="305" y="466" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="778-yO-1qi"/>
                                     <constraint firstAttribute="width" constant="200" id="Ols-83-CRu"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oCa-v3-D49">
-                                <rect key="frame" x="20" y="724" width="374" height="50"/>
+                                <rect key="frame" x="20" y="947" width="770" height="40"/>
                                 <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="xRq-qS-5NW"/>
+                                    <constraint firstAttribute="height" constant="40" id="EpB-Rf-lFE"/>
                                 </constraints>
                                 <state key="normal" title="Scan Image">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -62,7 +62,7 @@
                             <constraint firstItem="UM2-zO-AKN" firstAttribute="centerX" secondItem="el8-1I-otT" secondAttribute="centerX" id="PWa-Ry-LTg"/>
                             <constraint firstItem="97z-S0-r1u" firstAttribute="bottom" secondItem="zhS-Ug-H4Z" secondAttribute="bottom" id="QdN-vJ-aco"/>
                             <constraint firstItem="zhS-Ug-H4Z" firstAttribute="trailing" secondItem="w7j-xu-9OB" secondAttribute="trailing" constant="376" id="TIy-dm-cqu"/>
-                            <constraint firstItem="zhS-Ug-H4Z" firstAttribute="bottom" secondItem="oCa-v3-D49" secondAttribute="bottom" constant="39" id="Xh5-El-Ors"/>
+                            <constraint firstItem="zhS-Ug-H4Z" firstAttribute="bottom" secondItem="oCa-v3-D49" secondAttribute="bottom" constant="43" id="Xh5-El-Ors"/>
                             <constraint firstItem="m5i-LM-9HQ" firstAttribute="top" secondItem="zhS-Ug-H4Z" secondAttribute="top" constant="33" id="aeV-dZ-sVJ"/>
                             <constraint firstItem="zhS-Ug-H4Z" firstAttribute="bottom" secondItem="w7j-xu-9OB" secondAttribute="bottom" constant="450" id="gh3-fd-dqf"/>
                             <constraint firstItem="m5i-LM-9HQ" firstAttribute="centerX" secondItem="el8-1I-otT" secondAttribute="centerX" id="hdW-Qf-CvR"/>
@@ -75,35 +75,35 @@
                     <connections>
                         <outlet property="imageView" destination="w7j-xu-9OB" id="3ug-eX-1qE"/>
                         <outlet property="scanButton" destination="oCa-v3-D49" id="SyO-Xz-7FR"/>
-                        <outlet property="scanningImage" destination="UM2-zO-AKN" id="tZ1-5c-8xg"/>
+                        <outlet property="scanningImage" destination="UM2-zO-AKN" id="gXD-qI-QVa"/>
                         <outlet property="sceneView" destination="97z-S0-r1u" id="DSt-Az-E4O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1047.65625" y="133.52855051244509"/>
+            <point key="canvasLocation" x="1047.4074074074074" y="133.33333333333334"/>
         </scene>
         <!--Setings View Controller-->
         <scene sceneID="7us-ly-iYl">
             <objects>
                 <viewController id="h2Y-ko-k3S" customClass="SetingsViewController" customModule="Video_AR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UMn-kQ-3QJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cby-a6-Jat">
-                                <rect key="frame" x="16" y="124" width="382" height="539"/>
+                                <rect key="frame" x="16" y="80" width="778" height="800"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" rowHeight="50" id="r5X-AF-Ee5" customClass="SettingsCell" customModule="Video_AR" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="382" height="50"/>
+                                        <rect key="frame" x="0.0" y="28" width="778" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r5X-AF-Ee5" id="MDW-Zp-fkL">
-                                            <rect key="frame" x="0.0" y="0.0" width="351" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="752" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qn-xm-TkZ">
-                                                    <rect key="frame" x="10" y="3.6666666666666679" width="37.666666666666664" height="43"/>
+                                                    <rect key="frame" x="10" y="3.5" width="37.5" height="43"/>
                                                     <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="14"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -128,7 +128,7 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eid-G5-fwX">
-                                <rect key="frame" x="135" y="64" width="168" height="52"/>
+                                <rect key="frame" x="333" y="20" width="168" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="168" id="4xT-4G-RI9"/>
                                 </constraints>
@@ -164,36 +164,36 @@
             <objects>
                 <viewController storyboardIdentifier="RecordingVC" id="Rff-kD-h0N" customClass="RecordingViewController" customModule="Video_AR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3cH-aH-vpZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording Library" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFi-yW-Iqg">
-                                <rect key="frame" x="48.666666666666657" y="88" width="317" height="35.666666666666657"/>
+                                <rect key="frame" x="246.5" y="44" width="317" height="35.5"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W6" family="Hiragino Mincho ProN" pointSize="35"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sSe-hZ-Pb0">
-                                <rect key="frame" x="187" y="428" width="40" height="40"/>
+                                <rect key="frame" x="385" y="520" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="DtB-6M-28q"/>
                                     <constraint firstAttribute="height" constant="40" id="UfT-Gd-4eT"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fCW-rr-nkI">
-                                <rect key="frame" x="20" y="173.66666666666669" width="374" height="632.33333333333326"/>
+                                <rect key="frame" x="20" y="129.5" width="770" height="894.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="recordingCell" rowHeight="40" id="M8k-vk-R7g" customClass="RecordingLibraryCell" customModule="Video_AR" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="40"/>
+                                        <rect key="frame" x="0.0" y="28" width="770" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M8k-vk-R7g" id="WuT-f2-HtO">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="744" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MkW-Ht-pe0">
-                                                    <rect key="frame" x="37" y="0.0" width="269" height="40"/>
+                                                    <rect key="frame" x="37" y="0.0" width="670" height="40"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -244,14 +244,14 @@
             <objects>
                 <viewController id="cWD-ik-VnN" customClass="VideoRecordingViewController" customModule="Video_AR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FEq-bX-UGX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egD-eI-Rh8">
-                                <rect key="frame" x="0.0" y="384" width="414" height="128"/>
+                                <rect key="frame" x="0.0" y="476" width="810" height="128"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dxg-xF-WpL">
-                                        <rect key="frame" x="13" y="46" width="185" height="36"/>
+                                        <rect key="frame" x="13" y="46" width="394.5" height="36"/>
                                         <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
                                         <state key="normal" title="Take a Video">
@@ -262,7 +262,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WiC-P5-sOg">
-                                        <rect key="frame" x="231" y="46" width="165" height="36"/>
+                                        <rect key="frame" x="440.5" y="46" width="351.5" height="36"/>
                                         <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
                                         <state key="normal" title="Upload a Video">
@@ -308,15 +308,15 @@
             <objects>
                 <viewController id="uT1-Jo-Fa2" customClass="VideoPlaybackViewController" customModule="Video_AR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WPq-6J-Q1H">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="roy-OD-7J0">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TlK-Ya-T3U">
-                                <rect key="frame" x="20" y="295" width="374" height="315"/>
+                                <rect key="frame" x="20" y="251" width="770" height="587"/>
                                 <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                         </subviews>
@@ -397,7 +397,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QzB-vT-9b9">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="810" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -414,24 +414,24 @@
             <objects>
                 <viewController storyboardIdentifier="saveRecord" id="Kjk-zq-vxW" customClass="SaveRecordsViewController" customModule="Video_AR" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sUC-2Y-kcT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="810" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L9f-yp-p1f">
-                                <rect key="frame" x="0.0" y="84" width="414" height="778"/>
+                                <rect key="frame" x="0.0" y="40" width="810" height="1040"/>
                                 <subviews>
                                     <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="c8Q-qp-pdn">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="308"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="810" height="308"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="308" id="hm9-eQ-WiH"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q74-5h-WVE">
-                                        <rect key="frame" x="10" y="318" width="394" height="450"/>
+                                        <rect key="frame" x="10" y="318" width="790" height="712"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b2b-8U-UPa">
-                                                <rect key="frame" x="0.0" y="8" width="394" height="40"/>
+                                                <rect key="frame" x="0.0" y="8" width="790" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="OYk-kb-nfQ"/>
                                                 </constraints>
@@ -439,7 +439,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Short Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1V0-ds-cCE">
-                                                <rect key="frame" x="0.0" y="56" width="394" height="40"/>
+                                                <rect key="frame" x="0.0" y="56" width="790" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="IX5-Dz-TU7"/>
                                                     <constraint firstAttribute="height" constant="40" id="lRq-rT-L2f"/>
@@ -448,10 +448,10 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQH-cH-b1z">
-                                                <rect key="frame" x="0.0" y="368" width="394" height="82"/>
+                                                <rect key="frame" x="0.0" y="630" width="790" height="82"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDQ-TT-TH1">
-                                                        <rect key="frame" x="14" y="26" width="160" height="40"/>
+                                                        <rect key="frame" x="14" y="26" width="358" height="40"/>
                                                         <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="XtX-nw-EXb"/>
@@ -464,7 +464,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="all-EK-Nps">
-                                                        <rect key="frame" x="217" y="26" width="160" height="40"/>
+                                                        <rect key="frame" x="415" y="26" width="358" height="40"/>
                                                         <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="A0o-cY-L8g"/>
@@ -490,10 +490,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0JF-YY-9uk">
-                                                <rect key="frame" x="0.0" y="104" width="394" height="60"/>
+                                                <rect key="frame" x="0.0" y="104" width="790" height="60"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="AR Image Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XXQ-Lf-5ff">
-                                                        <rect key="frame" x="0.0" y="13" width="319" height="40"/>
+                                                        <rect key="frame" x="0.0" y="13" width="715" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="Ls4-D8-BLK"/>
                                                         </constraints>
@@ -501,7 +501,7 @@
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vN2-hy-8K1">
-                                                        <rect key="frame" x="351" y="19" width="24" height="22"/>
+                                                        <rect key="frame" x="747" y="19" width="24" height="22"/>
                                                         <state key="normal" image="camera.fill" catalog="system"/>
                                                         <connections>
                                                             <action selector="takeARImage" destination="Kjk-zq-vxW" eventType="touchUpInside" id="Ugi-RZ-7FL"/>
@@ -549,7 +549,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldn-s8-5U2">
-                                <rect key="frame" x="374" y="44" width="20" height="20"/>
+                                <rect key="frame" x="770" y="0.0" width="20" height="20"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="SZg-pR-72J"/>

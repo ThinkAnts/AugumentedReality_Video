@@ -40,6 +40,7 @@ class ARImageDataBase {
         _=ref.queryOrdered(byChild: "ImageClassification").observeSingleEvent(of: .value, with: { (snapshot) in
            
             //var confValue: Float = 0.0
+            var isError = true
             var downLoadUrl: String = ""
             for snap in snapshot.children {
                 let postDic = (snap as? DataSnapshot)?.value as? NSDictionary
@@ -53,9 +54,13 @@ class ARImageDataBase {
                             sortedArray = sortedArray.sorted()
                             let missingValues = Set(imageObs).subtracting(Set(sortedArray))
                             if imageObs.contains(array: sortedArray) {
+                                isError = false
                                 success(downLoadUrl)
-                            } else if missingValues.count < 5 {
+                                break
+                            } else if missingValues.count < 6 {
+                                isError = false
                                 success(downLoadUrl)
+                                break
                             }
                         }
                     }
@@ -65,10 +70,11 @@ class ARImageDataBase {
 
             if snapshot.childrenCount == 1 {
                 success(downLoadUrl)
+                isError = false
             } else if snapshot.childrenCount == 0 {
                 let error = NSError(domain: "", code: 100, userInfo: [ NSLocalizedDescriptionKey: "No Data Found"])
                 failure(error)
-            } else {
+            } else if isError {
                 let error = NSError(domain: "", code: 101, userInfo: [ NSLocalizedDescriptionKey: "Error Identified"])
                 failure(error)
             }
